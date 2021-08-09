@@ -43,7 +43,28 @@
 </header>
 {{ end }}
 
+
 {{ define "main" }}
+
+<!-- Post TOC -->
+<head><style type="text/css">
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  height: 40px;
+  background-color: #eee;
+  border-radius: 16px;
+  &:hover {
+    background-color: #ddd;
+  }
+}
+</style></head>
+<div class="post-toc" style="position: fixed; left: 10px; max-width:300px; overflow:auto; top: 500px; width: 100vw; bottom:10px">
+{{ partial "toc.html" . }}
+</div>
+
 <!-- Post Content -->
 <article>
     <div class="container">
@@ -55,6 +76,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
+                <!--
                 {{ if not (eq (.Param "showtoc") false) }}
                 <header>
                     <h2>TOC</h2>
@@ -62,7 +84,14 @@
                 {{.TableOfContents}}
                 {{ end }}
                 {{ .Content }}
+                -->
 
+                <!-- Post content 文章内容 -->
+                 <div class="post-content">
+                     {{ .Content }}
+                 </div>
+
+                <!-- 打赏 -->
                 {{ if .Site.Params.reward }}
                 {{ partial "reward.html" . }}
                 {{ end }}
