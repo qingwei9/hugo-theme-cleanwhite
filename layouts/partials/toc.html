@@ -1,16 +1,38 @@
+<!-- 参考：https://yyqx.online/posts/%E5%8D%9A%E5%AE%A2%E4%BE%A7%E8%BE%B9%E5%AF%BC%E8%88%AA%E6%A0%8F/ -->
+
 {{ if (.Params.toc | default true ) }}
+<head><style type="text/css">
+.post-toc{
+    position: fixed; left:20px;max-width:300px; overflow:auto; top: 100px; bottom:50px; flex-wrap: wrap;  /*换行*/
+}
+    .toc-wrapper {
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            height: 40px;
+            background-color: #eee;
+            border-radius: 16px;
+            &:hover {
+                background-color: #ddd;
+            }
+        }
+    }
+</style></head>
+
 <div class="post-toc" id="post-toc">
-<aside>
-    <header>
-    <h3> 本文目录</h3>
-    </header>
-    {{ $emtLiPtrn := "(?s)<ul>\\s<li>\\s<ul>(.*)</li>\\s</ul>" }}
-    {{ $rplcEmtLi := "<ul>$1" }}
-    {{ .TableOfContents | replaceRE $emtLiPtrn $rplcEmtLi | safeHTML }}
-    <!-- https://github.com/gohugoio/hugo/issues/1778#issuecomment-483880269 -->
-    <!-- {{.TableOfContents}} -->
-</aside>
-<a href="#" id="toc-toggle"></a>
+    <aside>
+        <header>
+            <h3> 本文目录</h3>
+        </header>
+        {{ $emtLiPtrn := "(?s)<ul>\\s<li>\\s<ul>(.*)</li>\\s</ul>" }}
+            {{ $rplcEmtLi := "<ul>$1" }}
+                {{ .TableOfContents | replaceRE $emtLiPtrn $rplcEmtLi | safeHTML }}
+                <!-- https://github.com/gohugoio/hugo/issues/1778#issuecomment-483880269 -->
+                <!-- {{.TableOfContents}} -->
+    </aside>
+    <a href="#" id="toc-toggle"></a>
 </div>
 
 {{ end }}
